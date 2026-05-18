@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 260" role="img" aria-label="Dipshits wordmark">
+  <defs>
+    
+  </defs>
+  
+  <g transform="translate(360 56) rotate(-3)">
+    <rect x="-120" y="-30" width="240" height="48" rx="24" fill="#FFD60A" stroke="#1A1313" stroke-width="4"></rect>
+    <text x="0" y="6" text-anchor="middle" class="tag" fill="#1A1313">crunch loud!</text>
+  </g>
+  
+  <text x="26" y="216" class="wm" fill="#1A1313">DIPSHITS</text>
+  
+  <text x="20" y="210" class="wm" fill="#FF2D8F">DIPSHITS</text>
+</svg>

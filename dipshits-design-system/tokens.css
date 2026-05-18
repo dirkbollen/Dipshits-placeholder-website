@@ -1,0 +1,385 @@
+/* ============================================================
+   DIPSHITS — Design Tokens + Utility Classes
+   Drop into any project: <link rel="stylesheet" href="tokens.css"/>
+   ============================================================ */
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Caveat+Brush&family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  /* ----- COLOR — saturated party palette ----- */
+  --hot-pink:        #FF2D8F;
+  --electric-yellow: #FFD60A;
+  --lime:            #1FBF5C;
+  --royal-blue:      #2D52E0;
+  --salsa-red:       #E8222B;
+  --grape:           #6B2BB8;
+  --mango:           #FF6B1F;
+  --mint:            #14C4B9;
+
+  /* Neutrals — warm, edible */
+  --tortilla:        #FFF6E5; /* default page bg */
+  --tortilla-deep:   #F5E6C8;
+  --queso:           #FFE9A8;
+  --ink:             #1A1313; /* warm near-black */
+  --ink-soft:        #3B2A2A;
+  --paper:           #FFFFFF; /* rare, contrast moments only */
+  --smoke:           #2A2020;
+
+  /* Semantic mapping */
+  --bg:              var(--tortilla);
+  --bg-alt:          var(--tortilla-deep);
+  --bg-loud:         var(--hot-pink);
+  --fg:              var(--ink);
+  --fg-soft:         var(--ink-soft);
+  --fg-on-loud:      var(--tortilla);
+  --border:          var(--ink);
+  --border-soft:     rgba(26, 19, 19, 0.15);
+
+  --success:         var(--lime);
+  --warning:         var(--mango);
+  --danger:          var(--salsa-red);
+  --info:            var(--royal-blue);
+
+  /* ----- TYPE ----- */
+  --font-display:  'Bagel Fat One', 'Bowlby One', system-ui, sans-serif;
+  --font-script:   'Caveat Brush', 'Caveat', cursive;
+  --font-subhead:  'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --font-body:     'DM Sans', system-ui, sans-serif;
+  --font-mono:     ui-monospace, 'JetBrains Mono', 'SF Mono', monospace;
+
+  --fs-mega:    clamp(72px, 12vw, 180px);
+  --fs-display: clamp(48px, 7vw, 112px);
+  --fs-h1:      clamp(40px, 5vw, 72px);
+  --fs-h2:      clamp(28px, 3.4vw, 48px);
+  --fs-h3:      clamp(22px, 2.4vw, 32px);
+  --fs-h4:      20px;
+  --fs-lg:      18px;
+  --fs-body:    16px;
+  --fs-sm:      14px;
+  --fs-xs:      12px;
+  --fs-script:  clamp(32px, 4vw, 56px);
+
+  --lh-tight:   0.95;
+  --lh-snug:    1.1;
+  --lh-normal:  1.45;
+  --lh-loose:   1.65;
+
+  --ls-tight:   -0.02em;
+  --ls-normal:  0;
+  --ls-wide:    0.04em;
+  --ls-mega:    0.08em;
+
+  --fw-regular: 400;
+  --fw-medium:  500;
+  --fw-bold:    700;
+
+  /* ----- SPACING — 4px base ----- */
+  --s-0:  0;
+  --s-1:  4px;
+  --s-2:  8px;
+  --s-3:  12px;
+  --s-4:  16px;
+  --s-5:  24px;
+  --s-6:  32px;
+  --s-7:  48px;
+  --s-8:  64px;
+  --s-9:  96px;
+  --s-10: 128px;
+
+  /* ----- RADII — bold by default ----- */
+  --r-xs:   6px;
+  --r-sm:   10px;
+  --r-md:   12px;  /* default */
+  --r-lg:   20px;  /* cards */
+  --r-xl:   32px;  /* big cards / heroes */
+  --r-full: 999px; /* pills, stickers */
+
+  /* ----- SHADOWS — chunky hard offset ----- */
+  --shadow-chunk-sm:     3px 3px 0 var(--ink);
+  --shadow-chunk:        6px 6px 0 var(--ink);
+  --shadow-chunk-lg:    10px 10px 0 var(--ink);
+  --shadow-chunk-pink:   6px 6px 0 var(--hot-pink);
+  --shadow-chunk-blue:   6px 6px 0 var(--royal-blue);
+  --shadow-chunk-yellow: 6px 6px 0 var(--electric-yellow);
+  --shadow-soft:         0 12px 28px -8px rgba(26, 19, 19, 0.25); /* photography only */
+
+  /* ----- BORDERS ----- */
+  --bw-1: 1px;
+  --bw-2: 2px;
+  --bw-3: 3px; /* default chunky */
+  --bw-4: 4px;
+  --bw-6: 6px;
+
+  /* ----- MOTION ----- */
+  --dur-fast:    140ms;
+  --dur:         220ms;
+  --dur-slow:    420ms;
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-snappy: cubic-bezier(0.2, 0.9, 0.3, 1.2);
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ----- LAYOUT ----- */
+  --maxw:   1240px;
+  --gutter: 32px;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+html, body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+}
+
+a {
+  color: var(--hot-pink);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+a:hover { color: var(--royal-blue); }
+
+::selection {
+  background: var(--electric-yellow);
+  color: var(--ink);
+}
+
+/* ============================================================
+   TYPE — apply as classes
+   ============================================================ */
+.ds-mega {
+  font-family: var(--font-display);
+  font-size: var(--fs-mega);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  text-transform: uppercase;
+  color: var(--fg);
+  margin: 0;
+}
+.ds-display {
+  font-family: var(--font-display);
+  font-size: var(--fs-display);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  text-transform: uppercase;
+  color: var(--fg);
+  margin: 0;
+}
+.ds-h1 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h1);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-tight);
+  text-transform: uppercase;
+  margin: 0;
+}
+.ds-h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-snug);
+  text-transform: uppercase;
+  margin: 0;
+}
+.ds-h3 {
+  font-family: var(--font-subhead);
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-tight);
+  margin: 0;
+}
+.ds-h4 {
+  font-family: var(--font-subhead);
+  font-size: var(--fs-h4);
+  font-weight: 700;
+  line-height: var(--lh-snug);
+  margin: 0;
+}
+.ds-script {
+  font-family: var(--font-script);
+  font-size: var(--fs-script);
+  line-height: var(--lh-snug);
+  color: var(--hot-pink);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  display: inline-block;
+  transform: rotate(-3deg);
+  transform-origin: left;
+}
+.ds-eyebrow {
+  font-family: var(--font-subhead);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  letter-spacing: var(--ls-mega);
+  text-transform: uppercase;
+  color: var(--fg-soft);
+}
+.ds-body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+  color: var(--fg);
+}
+.ds-body-lg {
+  font-family: var(--font-body);
+  font-size: var(--fs-lg);
+  line-height: var(--lh-normal);
+  color: var(--fg);
+}
+.ds-small {
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-normal);
+  color: var(--fg-soft);
+}
+.ds-caption {
+  font-family: var(--font-subhead);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--fg-soft);
+}
+.ds-mono {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-normal);
+}
+
+/* ============================================================
+   COMPONENT UTILITIES — minimal drop-in classes
+   ============================================================ */
+
+/* ----- Button: pill + chunky shadow ----- */
+.ds-button {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-size: 18px;
+  padding: 12px 24px;
+  border: var(--bw-3) solid var(--ink);
+  border-radius: var(--r-full);
+  background: var(--hot-pink);
+  color: var(--tortilla);
+  box-shadow: 5px 5px 0 var(--ink);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform var(--dur-fast) var(--ease-bounce), box-shadow var(--dur-fast);
+}
+.ds-button:hover {
+  transform: translate(-1px, -1px) rotate(-1deg);
+  box-shadow: 7px 7px 0 var(--ink);
+}
+.ds-button:active {
+  transform: translate(3px, 3px) rotate(0);
+  box-shadow: 0 0 0 var(--ink);
+}
+.ds-button--sm { font-size: 14px; padding: 8px 16px; box-shadow: 3px 3px 0 var(--ink); }
+.ds-button--lg { font-size: 24px; padding: 16px 36px; box-shadow: 6px 6px 0 var(--ink); }
+.ds-button--primary   { background: var(--hot-pink);        color: var(--tortilla); }
+.ds-button--secondary { background: var(--royal-blue);      color: var(--tortilla); }
+.ds-button--yellow    { background: var(--electric-yellow); color: var(--ink); }
+.ds-button--ghost     { background: var(--tortilla);        color: var(--ink); }
+
+/* ----- Card: cereal-box-cutout feel ----- */
+.ds-card {
+  background: var(--tortilla);
+  border: var(--bw-3) solid var(--ink);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-chunk);
+  padding: var(--s-6);
+}
+.ds-card--pink   { box-shadow: var(--shadow-chunk-pink); }
+.ds-card--blue   { box-shadow: var(--shadow-chunk-blue); }
+.ds-card--yellow { box-shadow: var(--shadow-chunk-yellow); }
+
+/* ----- Pill / tag ----- */
+.ds-pill {
+  font-family: var(--font-subhead);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border: 2.5px solid var(--ink);
+  border-radius: var(--r-full);
+  color: var(--ink);
+  background: var(--tortilla);
+  display: inline-block;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* ----- Sticker: round, tilted ----- */
+.ds-sticker {
+  --bg: var(--salsa-red);
+  --fg: var(--tortilla);
+  --size: 96px;
+  --rotate: -8deg;
+  width: var(--size);
+  height: var(--size);
+  border-radius: var(--r-full);
+  border: var(--bw-3) solid var(--ink);
+  background: var(--bg);
+  color: var(--fg);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-size: calc(var(--size) * 0.18);
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 0.95;
+  box-shadow: 4px 4px 0 var(--ink);
+  transform: rotate(var(--rotate));
+  flex-shrink: 0;
+}
+
+/* ----- Eyebrow script tag ----- */
+.ds-eyebrow-script {
+  font-family: var(--font-script);
+  font-size: clamp(28px, 3vw, 44px);
+  color: var(--hot-pink);
+  line-height: 1;
+  transform: rotate(-3deg);
+  transform-origin: left;
+  display: inline-block;
+}
+
+/* ----- Section helpers ----- */
+.ds-container {
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.ds-section {
+  padding-block: var(--s-9);
+}
+.ds-serape-band {
+  height: 22px;
+  border-top: var(--bw-3) solid var(--ink);
+  border-bottom: var(--bw-3) solid var(--ink);
+  background: repeating-linear-gradient(
+    90deg,
+    var(--mango) 0 40px, var(--electric-yellow) 40px 80px,
+    var(--lime) 80px 120px, var(--royal-blue) 120px 160px,
+    var(--hot-pink) 160px 200px, var(--grape) 200px 240px
+  );
+}
+
+/* ----- prefers-reduced-motion ----- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.001ms !important;
+    animation-duration: 0.001ms !important;
+  }
+  .ds-button:hover { transform: none; }
+}

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Starburst callout">
+  <g transform="translate(100 100)">
+    <polygon fill="#E8222B" stroke="#1A1313" stroke-width="4" stroke-linejoin="round" points="&#xA;      0,-95   20,-55   58,-72   45,-32   90,-30   55,0   90,30   45,32   58,72   20,55&#xA;      0,95    -20,55   -58,72   -45,32   -90,30   -55,0   -90,-30   -45,-32   -58,-72   -20,-55&#xA;    "></polygon>
+    <circle r="55" fill="#FFD60A" stroke="#1A1313" stroke-width="3"></circle>
+  </g>
+</svg>

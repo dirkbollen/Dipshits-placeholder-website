@@ -4,30 +4,28 @@
 <meta charset="utf-8">
 <title>Dipshits — please don't contact us</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="colors_and_type.css">
+<link rel="stylesheet" href="dipshits-design-system/tokens.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sigmar&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; }
-  html, body { margin: 0; height: 100%; }
+  html, body { margin: 0; }
   body {
     background: var(--hot-pink);
-    /* subtle halftone dot pattern in yellow on top of pink for vibrance */
     background-image: radial-gradient(var(--electric-yellow) 12%, transparent 14%);
     background-size: 36px 36px;
     color: var(--ink);
     font-family: var(--font-body);
-    overflow: hidden;
   }
 
   .stage {
-    min-height: 100vh;
+    min-height: 100svh;
     display: grid;
-    grid-template-rows: 1fr auto auto auto 1fr auto;
+    grid-template-rows: 1fr auto auto auto minmax(32px, 1fr) auto;
     align-items: center;
     justify-items: center;
-    padding: 48px 24px 0;
+    padding: clamp(16px, 3vh, 40px) clamp(16px, 5vw, 48px) 0;
     text-align: center;
     position: relative;
   }
@@ -35,21 +33,22 @@
   /* DIPSHITS wordmark */
   .wm {
     font-family: 'Sigmar', 'Bagel Fat One', system-ui, sans-serif;
-    font-size: clamp(64px, 12vw, 180px);
+    font-size: clamp(52px, min(12vw, 14vh), 160px);
     line-height: 0.95;
     letter-spacing: 0.005em;
     margin: 0;
     color: var(--electric-yellow);
     text-shadow:
-      6px 6px 0 var(--ink),
-      12px 12px 0 var(--royal-blue);
+      4px 4px 0 var(--ink),
+      8px 8px 0 var(--royal-blue);
     transform: rotate(-2deg);
   }
 
-  /* chip illustration — yellow with chunky outline + offset shadow */
+  /* chip illustration */
   .chip {
-    margin: 6vh 0 4vh;
-    width: clamp(180px, 22vw, 280px);
+    margin: clamp(8px, 2vh, 20px) 0 clamp(10px, 2.5vh, 24px);
+    width: clamp(120px, 28vw, 260px);
+    max-height: clamp(140px, 30vh, 260px);
     height: auto;
     filter: drop-shadow(6px 6px 0 var(--ink));
     transform: rotate(-8deg);
@@ -63,7 +62,7 @@
   /* copy block */
   .line {
     font-family: var(--font-display);
-    font-size: clamp(28px, 3.8vw, 56px);
+    font-size: clamp(22px, min(5vw, 7vh), 52px);
     text-transform: uppercase;
     letter-spacing: -0.01em;
     color: var(--tortilla);
@@ -72,16 +71,16 @@
   }
 
   .btn {
-    margin: 18px 0;
+    margin: clamp(10px, 2vh, 18px) 0;
     font-family: var(--font-display);
-    font-size: clamp(20px, 2.4vw, 36px);
+    font-size: clamp(18px, min(3vw, 4.5vh), 34px);
     text-transform: uppercase;
     letter-spacing: 0.01em;
     color: var(--ink);
     background: var(--electric-yellow);
     border: 4px solid var(--ink);
     border-radius: 999px;
-    padding: 14px 32px;
+    padding: clamp(10px, 1.5vh, 14px) clamp(20px, 3vw, 32px);
     cursor: pointer;
     box-shadow: 6px 6px 0 var(--ink);
     transition: transform 160ms cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 160ms;
@@ -114,17 +113,207 @@
     justify-self: stretch;
   }
 
-  /* tiny floating stickers for vibrance */
+  /* stickers — hidden on small screens to avoid overlap */
   .sticker {
+    display: none;
     position: absolute;
-    width: 110px; height: 110px; border-radius: 999px;
-    border: 4px solid var(--ink); box-shadow: 5px 5px 0 var(--ink);
-    display: flex; align-items: center; justify-content: center; text-align: center;
-    font-family: var(--font-display); text-transform: uppercase;
-    font-size: 18px; line-height: 0.95;
+    border-radius: 999px;
+    border: 4px solid var(--ink);
+    box-shadow: 5px 5px 0 var(--ink);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    line-height: 0.95;
   }
-  .sticker.tl { top: 36px; left: 36px; background: var(--lime); color: var(--ink); transform: rotate(-12deg); }
-  .sticker.tr { top: 36px; right: 36px; background: var(--royal-blue); color: var(--electric-yellow); transform: rotate(10deg); }
+  .sticker.tl { background: var(--lime); color: var(--ink); transform: rotate(-12deg); }
+  .sticker.tr { background: var(--royal-blue); color: var(--electric-yellow); transform: rotate(10deg); }
+
+  /* --- Breakpoints --- */
+
+  /* Tablet: 640px+ */
+  @media (min-width: 640px) {
+    .wm {
+      text-shadow:
+        6px 6px 0 var(--ink),
+        12px 12px 0 var(--royal-blue);
+    }
+    .sticker {
+      display: flex;
+      width: 88px; height: 88px;
+      font-size: 14px;
+    }
+    .sticker.tl { top: 24px; left: 24px; }
+    .sticker.tr { top: 24px; right: 24px; }
+  }
+
+  /* Desktop: 1024px+ */
+  @media (min-width: 1024px) {
+    .sticker {
+      width: 110px; height: 110px;
+      font-size: 18px;
+    }
+    .sticker.tl { top: 36px; left: 36px; }
+    .sticker.tr { top: 36px; right: 36px; }
+  }
+
+  /* Large desktop: 1440px+ */
+  @media (min-width: 1440px) {
+    .sticker {
+      width: 130px; height: 130px;
+      font-size: 20px;
+    }
+    .sticker.tl { top: 48px; left: 48px; }
+    .sticker.tr { top: 48px; right: 48px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .chip { animation: none; }
+  }
+
+  /* ---- Contact overlay ---- */
+  .contact-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: var(--tortilla);
+    background-image: radial-gradient(var(--hot-pink) 10%, transparent 12%);
+    background-size: 28px 28px;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(16px);
+    transition: opacity 260ms var(--ease-out, cubic-bezier(0.16,1,0.3,1)),
+                transform 260ms var(--ease-out, cubic-bezier(0.16,1,0.3,1));
+  }
+  .contact-overlay.is-open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .contact-inner {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(64px, 8vw, 96px) clamp(24px, 6vw, 80px) clamp(24px, 4vh, 48px);
+    overflow-y: auto;
+    position: relative;
+  }
+
+  .overlay-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 52px;
+    height: 52px;
+    border-radius: 999px;
+    border: 3px solid var(--ink);
+    background: var(--electric-yellow);
+    color: var(--ink);
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 3px 3px 0 var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 140ms cubic-bezier(0.34,1.56,0.64,1), box-shadow 140ms;
+  }
+  .overlay-close:hover {
+    transform: translate(-1px,-1px) rotate(-10deg);
+    box-shadow: 5px 5px 0 var(--ink);
+  }
+  .overlay-close:active {
+    transform: translate(2px,2px);
+    box-shadow: 0 0 0 var(--ink);
+  }
+
+  .contact-content {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .form-eyebrow {
+    font-family: 'Caveat Brush', cursive;
+    font-size: clamp(22px, 4vw, 38px);
+    color: var(--hot-pink);
+    transform: rotate(-3deg);
+    transform-origin: left;
+    display: inline-block;
+    margin: 0 0 2px;
+    line-height: 1;
+  }
+  .form-title {
+    font-family: 'Sigmar', 'Bagel Fat One', system-ui, sans-serif;
+    font-size: clamp(44px, min(10vw, 12vh), 96px);
+    line-height: 0.95;
+    color: var(--ink);
+    text-shadow: 4px 4px 0 var(--royal-blue);
+    transform: rotate(-1deg);
+    margin: 0 0 clamp(20px, 4vh, 36px);
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(12px, 2vh, 20px);
+  }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field-label {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .field-input {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 16px;
+    color: var(--ink);
+    background: #fff;
+    border: 3px solid var(--ink);
+    border-radius: 12px;
+    padding: 12px 16px;
+    width: 100%;
+    outline: none;
+    box-shadow: 3px 3px 0 var(--ink);
+    transition: border-color 140ms, box-shadow 140ms;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .field-input::placeholder { color: var(--ink-soft, #3B2A2A); opacity: 0.5; }
+  .field-input:focus {
+    border-color: var(--royal-blue);
+    box-shadow: 3px 3px 0 var(--royal-blue);
+  }
+  .field-textarea {
+    resize: vertical;
+    min-height: clamp(90px, 16vh, 140px);
+  }
+  .form-submit { margin-top: clamp(4px, 1vh, 8px); }
+
+  .form-success {
+    text-align: center;
+    padding: clamp(24px, 6vh, 56px) 0;
+  }
+  .success-title {
+    font-family: 'Sigmar', 'Bagel Fat One', system-ui, sans-serif;
+    font-size: clamp(56px, min(14vw, 16vh), 120px);
+    color: var(--lime);
+    text-shadow: 4px 4px 0 var(--ink);
+    margin: 0 0 8px;
+    line-height: 1;
+  }
+  .success-body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: clamp(16px, 2.5vw, 20px);
+    color: var(--ink);
+    margin: 0 0 clamp(20px, 4vh, 32px);
+  }
 </style>
 </head>
 <body data-screen-label="Placeholder — landing">
@@ -133,17 +322,107 @@
 
     <h1 class="wm">DIPSHITS</h1>
 
-    <img class="chip" src="assets/chip-illustration.svg" alt="Vibrant yellow tortilla chip"/>
+    <img class="chip" src="dipshits-design-system/assets/smiley-shades.svg" alt="Vibrant yellow tortilla chip"/>
 
     <div>
       <p class="line">Please don't</p>
-      <a class="btn" href="mailto:hi@dipshits.party">Contact us</a>
-      <p class="line">us</p>
+      <button class="btn" id="openContact">Contact us</button>
     </div>
 
     <div></div>
 
     <div class="serape"></div>
   </div>
+  <div class="contact-overlay" id="contactOverlay" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Contact form">
+    <div class="contact-inner">
+      <button class="overlay-close" id="overlayClose" aria-label="Close">✕</button>
+
+      <div class="contact-content">
+        <p class="form-eyebrow">say hi to</p>
+        <h2 class="form-title">DIPSHITS</h2>
+
+        <form class="contact-form" id="contactForm" action="https://formspree.io/f/maqkyvwr" method="POST">
+          <div class="field">
+            <label class="field-label" for="cf-name">Name</label>
+            <input class="field-input" type="text" id="cf-name" name="name" required placeholder="Your name">
+          </div>
+          <div class="field">
+            <label class="field-label" for="cf-email">Your email</label>
+            <input class="field-input" type="email" id="cf-email" name="email" required placeholder="you@example.com">
+          </div>
+          <div class="field">
+            <label class="field-label" for="cf-request">Your request</label>
+            <textarea class="field-input field-textarea" id="cf-request" name="request" required placeholder="What's on your mind?"></textarea>
+          </div>
+          <button type="submit" class="btn form-submit">Send it →</button>
+        </form>
+
+        <div class="form-success" id="formSuccess" hidden>
+          <p class="success-title">GOT IT.</p>
+          <p class="success-body">We'll be in touch — or we won't. Either way, respect.</p>
+          <button class="btn" id="closeSuccess">Back to business</button>
+        </div>
+      </div>
+    </div>
+    <div class="serape"></div>
+  </div>
+
+  <script>
+    const overlay    = document.getElementById('contactOverlay');
+    const openBtn    = document.getElementById('openContact');
+    const closeBtn   = document.getElementById('overlayClose');
+    const form       = document.getElementById('contactForm');
+    const successMsg = document.getElementById('formSuccess');
+    const closeSuccess = document.getElementById('closeSuccess');
+
+    function openOverlay() {
+      overlay.classList.add('is-open');
+      overlay.setAttribute('aria-hidden', 'false');
+      overlay.querySelector('input').focus();
+    }
+
+    function closeOverlay() {
+      overlay.classList.remove('is-open');
+      overlay.setAttribute('aria-hidden', 'true');
+      openBtn.focus();
+    }
+
+    openBtn.addEventListener('click', openOverlay);
+    closeBtn.addEventListener('click', closeOverlay);
+    closeSuccess.addEventListener('click', () => {
+      form.reset();
+      form.hidden = false;
+      successMsg.hidden = true;
+      closeOverlay();
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeOverlay();
+    });
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const submitBtn = form.querySelector('[type="submit"]');
+      submitBtn.textContent = 'Sending…';
+      submitBtn.disabled = true;
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' }
+        });
+        if (res.ok) {
+          form.hidden = true;
+          successMsg.hidden = false;
+        } else {
+          submitBtn.textContent = 'Try again →';
+          submitBtn.disabled = false;
+        }
+      } catch {
+        submitBtn.textContent = 'Try again →';
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
 </body>
 </html>
