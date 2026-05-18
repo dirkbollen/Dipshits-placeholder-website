@@ -309,9 +309,11 @@
     line-height: 1;
   }
   .success-body {
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: clamp(16px, 2.5vw, 20px);
-    color: var(--ink);
+    font-family: 'Bagel Fat One', system-ui, sans-serif;
+    font-size: clamp(22px, min(4vw, 5vh), 42px);
+    color: var(--royal-blue);
+    text-shadow: 2px 2px 0 var(--ink);
+    line-height: 1.1;
     margin: 0 0 clamp(20px, 4vh, 32px);
   }
 </style>
@@ -338,10 +340,12 @@
       <button class="overlay-close" id="overlayClose" aria-label="Close">✕</button>
 
       <div class="contact-content">
-        <p class="form-eyebrow">say hi to</p>
-        <h2 class="form-title">DIPSHITS</h2>
+        <div id="formHeader">
+          <p class="form-eyebrow">say hi to</p>
+          <h2 class="form-title">DIPSHITS</h2>
+        </div>
 
-        <form class="contact-form" id="contactForm" action="https://formspree.io/f/maqkyvwr" method="POST">
+        <form class="contact-form" id="contactForm" action="https://formspree.io/f/maqkyvwr" method="POST" novalidate>
           <div class="field">
             <label class="field-label" for="cf-name">Name</label>
             <input class="field-input" type="text" id="cf-name" name="name" required placeholder="Your name">
@@ -357,7 +361,7 @@
           <button type="submit" class="btn form-submit">Send it →</button>
         </form>
 
-        <div class="form-success" id="formSuccess" hidden>
+        <div class="form-success" id="formSuccess" style="display:none">
           <p class="success-title">GOT IT.</p>
           <p class="success-body">We'll be in touch — or we won't. Either way, respect.</p>
           <button class="btn" id="closeSuccess">Back to business</button>
@@ -391,8 +395,9 @@
     closeBtn.addEventListener('click', closeOverlay);
     closeSuccess.addEventListener('click', () => {
       form.reset();
-      form.hidden = false;
-      successMsg.hidden = true;
+      form.style.display = '';
+      successMsg.style.display = 'none';
+      document.getElementById('formHeader').style.display = '';
       closeOverlay();
     });
 
@@ -400,28 +405,17 @@
       if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeOverlay();
     });
 
-    form.addEventListener('submit', async e => {
+    form.addEventListener('submit', e => {
       e.preventDefault();
-      const submitBtn = form.querySelector('[type="submit"]');
-      submitBtn.textContent = 'Sending…';
-      submitBtn.disabled = true;
-      try {
-        const res = await fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: { Accept: 'application/json' }
-        });
-        if (res.ok) {
-          form.hidden = true;
-          successMsg.hidden = false;
-        } else {
-          submitBtn.textContent = 'Try again →';
-          submitBtn.disabled = false;
-        }
-      } catch {
-        submitBtn.textContent = 'Try again →';
-        submitBtn.disabled = false;
-      }
+      const data = new FormData(form);
+      document.getElementById('formHeader').style.display = 'none';
+      form.style.display = 'none';
+      successMsg.style.display = 'block';
+      fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { Accept: 'application/json' }
+      });
     });
   </script>
 </body>
